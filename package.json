@@ -1,10 +1,12 @@
 {
   "name": "acblog",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-prod-ali-alva": "ng build -c acblog --base-href=/alvablog/",
+    "build-prod-ali-fish": "ng build -c fishblog --base-href=/fishblog/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -19,6 +21,10 @@
     "@angular/platform-browser": "~9.1.4",
     "@angular/platform-browser-dynamic": "~9.1.4",
     "@angular/router": "~9.1.4",
+    "katex": "^0.11.1",
+    "marked": "^1.0.0",
+    "ng-zorro-antd": "^9.1.0",
+    "ngx-markdown": "^9.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -28,9 +34,10 @@
     "@angular/cli": "~9.1.4",
     "@angular/compiler-cli": "~9.1.4",
     "@angular/language-service": "~9.1.4",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/katex": "^0.11.0",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",

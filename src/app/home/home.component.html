@@ -1,0 +1,13 @@
+<!-- Table of Content -->
+<nz-table #basicTable [nzData]="dataService.listPost">
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>
+        <a routerLink="/blog/{{data.id}}"><h1>{{ data.title }}</h1></a>
+        <p>{{ data.brief }}</p>
+        <nz-divider></nz-divider>
+        <p>{{ data.createdat }}</p>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
