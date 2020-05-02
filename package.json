@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-prod-ali-alva": "ng build -c acblog --base-href=/alvablog/",
+    "build-prod-ali-alva": "ng build -c alvablog --base-href=/alvablog/",
     "build-prod-ali-fish": "ng build -c fishblog --base-href=/fishblog/",
     "test": "ng test",
     "lint": "ng lint",

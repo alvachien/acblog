@@ -1,19 +1,19 @@
 <nz-layout>
-  <nz-header>{{title}}</nz-header>
+  <nz-header><h1>{{title}}</h1></nz-header>
   <nz-layout>
-    <nz-content>
+    <nz-content style="margin: 8px;">
       <div nz-row style="margin-top: 16px; margin-left: 16px;" [nzGutter]="8">
         <div nz-col nzXs="24" nzSm="24" nzMd="16" nzLg="18" nzXl="18">
           <router-outlet></router-outlet>
         </div>
         <div nz-col nzXs="24" nzSm="24" nzMd="8" nzLg="6" nzXl="6">
           <!-- Collection -->
-          <nz-list nzBordered nzSize="small">
+          <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
             <nz-list-header>Collection</nz-list-header>
             <nz-list-item *ngFor="let coll of listCollection">{{coll}}</nz-list-item>
           </nz-list>
           <!-- Dates -->
-          <nz-list nzBordered nzSize="small">
+          <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
             <nz-list-header>Date</nz-list-header>
             <nz-list-item *ngFor="let dt of listDate">{{dt}}</nz-list-item>
           </nz-list>

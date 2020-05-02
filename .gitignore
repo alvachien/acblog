@@ -45,7 +45,3 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Project specific
-assets/post_def.json
-assets/posts/*
-assets/post_setting.json
