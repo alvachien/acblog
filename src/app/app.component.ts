@@ -23,17 +23,16 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dataService.readSetting()
     ]).subscribe({
       next: rtns => {
-        let posts = rtns[0];
-        let setting = rtns[1];
+        // let posts = rtns[0];
+        const setting = rtns[1];
         this.title = setting.title;
         this.footer = setting.footer;
         document.title = this.title;
     
-        let dates: Date[] = [];
         this.dataService.listPost.forEach(val => {
           if (val.createdat) {
-            let cdt = new Date(val.createdat);
-            let cdtstr = cdt.toDateString();
+            const cdt = new Date(val.createdat);
+            const cdtstr = cdt.toDateString();
             if (this.listDate.indexOf(cdtstr) === -1) {
               this.listDate.push(cdtstr);
             }

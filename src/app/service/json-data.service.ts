@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -29,6 +30,9 @@ export class JsonDataService {
       .pipe(
         map(data => {
         this._listPost = data as any;
+        this._listPost.sort((a, b) => {
+          return -1 * (a.createdat as string).localeCompare(b.createdat as string);
+        });
         this.isListPostLoaded = true;
         return this.listPost;
       }));
