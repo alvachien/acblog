@@ -16,6 +16,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
 import { JsonDataService } from './service/json-data.service';
@@ -41,6 +43,7 @@ registerLocaleData(zh);
     NzTableModule,
     NzDividerModule,
     NzGridModule,
+    NzBreadCrumbModule,
     MarkdownModule.forRoot(),
   ],
   providers: [{
