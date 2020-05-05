@@ -4,14 +4,15 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
+import { BlogSetting, BlogPost } from '../model/blogmodel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JsonDataService {
-  private _listPost: any[] = []; 
+  private _listPost: BlogPost[] = []; 
+  private _setting: BlogSetting;
   isListPostLoaded = false;
-  private _setting: any = {};
   isSettingLoaded = false;
 
   get listPost(): any[] {
@@ -24,14 +25,14 @@ export class JsonDataService {
   constructor(private client: HttpClient) {
   }
 
-  readPost(): Observable<any[]> {
+  readPost(): Observable<BlogPost[]> {
     if (!this.isListPostLoaded) {
       return this.client.get(environment.assetfolder + '/post_def.json')
       .pipe(
         map(data => {
-        this._listPost = data as any;
+        this._listPost = data as BlogPost[];
         this._listPost.sort((a, b) => {
-          return -1 * (a.createdat as string).localeCompare(b.createdat as string);
+          return -1 * a.createdat.localeCompare(b.createdat);
         });
         this.isListPostLoaded = true;
         return this.listPost;
@@ -41,12 +42,12 @@ export class JsonDataService {
     }
   }
 
-  readSetting(): Observable<any> {
+  readSetting(): Observable<BlogSetting> {
     if (!this.isSettingLoaded) {
       return this.client.get(environment.assetfolder + '/blog_setting.json')
       .pipe(
         map(data => {
-        this._setting = data as any;
+        this._setting = data as BlogSetting;
         this.isSettingLoaded = true;
         return this.setting;
       }));
