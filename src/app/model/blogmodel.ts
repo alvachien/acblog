@@ -7,7 +7,9 @@ export class BlogSetting {
 export class BlogPost {
     public id: number;
     public title: string;
-    public createdat: string;  
+    public createdat: string;
+    public collection: string[] = [];
+    public tags: string[] = [];
 }
 
 export class BlogCollectionSet {

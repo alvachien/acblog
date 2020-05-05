@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
 
 import { environment } from 'src/environments/environment';
-import { BlogSetting, BlogPost } from '../model/blogmodel';
+import { BlogSetting, BlogPost, BlogCollectionSet, BlogDateSet } from '../model/blogmodel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ import { BlogSetting, BlogPost } from '../model/blogmodel';
 export class JsonDataService {
   private _listPost: BlogPost[] = []; 
   private _setting: BlogSetting;
+  private _listCollection: BlogCollectionSet[] = [];
+  private _listDates: BlogDateSet[] = [];
   isListPostLoaded = false;
   isSettingLoaded = false;
 
@@ -20,6 +23,12 @@ export class JsonDataService {
   }
   get setting(): any {
     return this._setting;
+  }
+  get CollectionSet(): BlogCollectionSet[] {
+    return this._listCollection;
+  }
+  get DateSet(): BlogDateSet[] {
+    return this._listDates;
   }
 
   constructor(private client: HttpClient) {
@@ -35,6 +44,34 @@ export class JsonDataService {
           return -1 * a.createdat.localeCompare(b.createdat);
         });
         this.isListPostLoaded = true;
+
+        // Workout
+        this._listPost.forEach(val => {
+          if (val.createdat) {
+            const cdt = new Date(val.createdat);
+            // const cdtstr = cdt.toDateString();
+
+            const postidx = this._listDates.findIndex(val2 => {
+              return val.createdat === val2.postdate;
+            });
+            if (postidx === -1) {
+              let objdate = new BlogDateSet();
+              objdate.postdate = val.createdat;
+              objdate.posts = [];
+              objdate.posts.push(val);
+              this._listDates.push(objdate);
+            } else {
+              this._listDates[postidx].posts.push(val);
+            }
+          }
+
+          val.collection.forEach(col => {
+            if (this.listCollection.indexOf(col) === -1) {
+              this.listCollection.push(col);
+            }
+          });
+        });
+
         return this.listPost;
       }));
     } else {

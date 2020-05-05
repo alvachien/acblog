@@ -1,5 +1,12 @@
-<nz-layout>
-  <nz-header><h1>{{title}}</h1></nz-header>
+<nz-layout class="mainpage-layout">
+  <nz-header>
+    <h1>{{title}}</h1>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item>Alva<b style="color: darksalmon;">Chien</b>.com</li>
+      <li nz-menu-item>nav 2</li>
+      <li nz-menu-item>nav 3</li>
+    </ul>    
+  </nz-header>
   <nz-layout>
     <nz-content style="margin: 8px;">
       <div nz-row style="margin-top: 16px; margin-left: 16px;" [nzGutter]="8">
