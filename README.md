@@ -9,10 +9,10 @@ Major features:
 - [X] Collections;
 - [X] Post Date;
 - [X] About Author;
-- [] Navigation from Collections;
-- [] Navigation from Dates;
-- [] Dynamic Themes;
-- [] Comment
+- [ ] Navigation from Collections;
+- [ ] Navigation from Dates;
+- [ ] Dynamic Themes;
+- [ ] Comment
 
 # usage
 
