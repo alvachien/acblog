@@ -1,95 +1,90 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { environment } from 'src/environments/environment';
-import { BlogSetting, BlogPost, BlogCollectionSet, BlogDateSet } from '../model/blogmodel';
+import { BlogSetting, BlogPost, } from '../model/blogmodel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JsonDataService {
-  private _listPost: BlogPost[] = []; 
-  private _setting: BlogSetting;
-  private _listCollection: BlogCollectionSet[] = [];
-  private _listDates: BlogDateSet[] = [];
+  // private _listPost: BlogPost[] = []; 
+  // private _setting: BlogSetting;
   isListPostLoaded = false;
   isSettingLoaded = false;
 
-  get listPost(): any[] {
-    return this._listPost;
+  subjectPost: BehaviorSubject<BlogPost[]>;
+  subjectSetting: BehaviorSubject<BlogSetting>;
+
+  get listPost(): BlogPost[] {
+    return this.subjectPost.getValue();
   }
-  get setting(): any {
-    return this._setting;
-  }
-  get CollectionSet(): BlogCollectionSet[] {
-    return this._listCollection;
-  }
-  get DateSet(): BlogDateSet[] {
-    return this._listDates;
+  get setting(): BlogSetting {
+    return this.subjectSetting.getValue();
   }
 
   constructor(private client: HttpClient) {
+    console.log('service.constructor');
+    this.subjectPost = new BehaviorSubject([]);
+    this.subjectSetting = new BehaviorSubject(undefined);
   }
 
-  readPost(): Observable<BlogPost[]> {
+  readPost(): Observable<boolean> {
+    console.log('service.readpost.start');
     if (!this.isListPostLoaded) {
       return this.client.get(environment.assetfolder + '/post_def.json')
       .pipe(
         map(data => {
-        this._listPost = data as BlogPost[];
-        this._listPost.sort((a, b) => {
-          return -1 * a.createdat.localeCompare(b.createdat);
-        });
-        this.isListPostLoaded = true;
-
-        // Workout
-        this._listPost.forEach(val => {
-          if (val.createdat) {
-            const cdt = new Date(val.createdat);
-            // const cdtstr = cdt.toDateString();
-
-            const postidx = this._listDates.findIndex(val2 => {
-              return val.createdat === val2.postdate;
+          console.log('service.readpost.received.map');
+          if (data instanceof Array && data.length > 0) {
+            let arpost: BlogPost[] = [];
+            data.forEach(ditem => {
+              let post = new BlogPost();
+              post.id = ditem.id;
+              post.title = ditem.title;
+              post.createdat = moment(ditem.createdat);
+              post.collection = ditem.collection;
+              post.tags = ditem.tags;
+              arpost.push(post);
             });
-            if (postidx === -1) {
-              let objdate = new BlogDateSet();
-              objdate.postdate = val.createdat;
-              objdate.posts = [];
-              objdate.posts.push(val);
-              this._listDates.push(objdate);
-            } else {
-              this._listDates[postidx].posts.push(val);
-            }
+
+            arpost.sort((a, b) => {
+              if (a.createdat.isAfter(b.createdat)) {
+                return 1;
+              }
+              if (a.createdat.isBefore(b.createdat)) {
+                return -1;
+              }
+              return 0;
+            });
+            this.subjectPost.next(arpost);
           }
 
-          val.collection.forEach(col => {
-            if (this.listCollection.indexOf(col) === -1) {
-              this.listCollection.push(col);
-            }
-          });
-        });
-
-        return this.listPost;
-      }));
+          this.isListPostLoaded = true;
+          return this.isListPostLoaded;
+        })
+      );
     } else {
-      return of(this.listPost);
+      return of(this.isListPostLoaded);
     }
   }
 
-  readSetting(): Observable<BlogSetting> {
+  readSetting(): Observable<boolean> {
     if (!this.isSettingLoaded) {
       return this.client.get(environment.assetfolder + '/blog_setting.json')
       .pipe(
         map(data => {
-        this._setting = data as BlogSetting;
+        let setting = data as BlogSetting;
+        this.subjectSetting.next(setting);
+
         this.isSettingLoaded = true;
-        return this.setting;
+        return true;
       }));
     } else {
-      return of(this.setting);
+      return of(this.isSettingLoaded);
     }
   }
 }

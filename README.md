@@ -6,8 +6,11 @@ A tiny Blog system built with Angular/Ant Design
 Major features:
 - [X] Static files based blog system ( Statistic files are through *blogs* folder defined in [HIHAPI](https://github.com/alvachien/achihapi) );
 - [X] Abosulte URL to blog entry;
-- [] Collections;
-- [] Post Date;
+- [X] Collections;
+- [X] Post Date;
+- [X] About Author;
+- [] Navigation from Collections;
+- [] Navigation from Dates;
 - [] Dynamic Themes;
 - [] Comment
 

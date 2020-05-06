@@ -1,7 +1,3 @@
-.mainpage-sidepanel {
-  margin: 8px;
-}
-
 .mainpage-layout {
   min-height: 100vh;  
 }
@@ -9,15 +5,32 @@
 nz-header {
   position: fixed;
   width: 100%;
+  z-index: 99;
+}
+
+.logo {
+  float: left;
+  text-align: center;  
 }
 
 [nz-menu] {
+  float: right;
   line-height: 64px;
 }
 
 nz-content {
   padding: 0 50px;
   margin-top: 64px;
+}
+
+.inner-content {
+  margin: 16px 0;
+  padding: 24px;
+  min-height: 380px;
+}
+
+.mainpage-sidepanel {
+  margin: 8px;
 }
 
 nz-footer {

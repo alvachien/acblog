@@ -18,11 +18,13 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
 import { JsonDataService } from './service/json-data.service';
 import { MarkdownModule } from 'ngx-markdown';
+import { BlogListComponent } from './blog-list/blog-list.component';
 
 registerLocaleData(zh);
 
@@ -30,7 +32,8 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     BlogComponent,
-    HomeComponent
+    HomeComponent,
+    BlogListComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ registerLocaleData(zh);
     NzGridModule,
     NzBreadCrumbModule,
     NzMenuModule,
+    NzCardModule,
     MarkdownModule.forRoot(),
   ],
   providers: [{

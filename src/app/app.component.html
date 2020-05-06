@@ -1,32 +1,38 @@
 <nz-layout class="mainpage-layout">
   <nz-header>
-    <h1>{{title}}</h1>
+    <div class="logo">{{title}}</div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item>Alva<b style="color: darksalmon;">Chien</b>.com</li>
+      <li nz-menu-item>Alva<b style="color:goldenrod;">Chien</b>.com</li>
       <li nz-menu-item>nav 2</li>
       <li nz-menu-item>nav 3</li>
     </ul>    
   </nz-header>
-  <nz-layout>
-    <nz-content style="margin: 8px;">
-      <div nz-row style="margin-top: 16px; margin-left: 16px;" [nzGutter]="8">
-        <div nz-col nzXs="24" nzSm="24" nzMd="16" nzLg="18" nzXl="18">
-          <router-outlet></router-outlet>
-        </div>
-        <div nz-col nzXs="24" nzSm="24" nzMd="8" nzLg="6" nzXl="6">
-          <!-- Collection -->
-          <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
-            <nz-list-header>Collection</nz-list-header>
-            <nz-list-item *ngFor="let coll of listCollection">{{coll}}</nz-list-item>
-          </nz-list>
-          <!-- Dates -->
-          <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
-            <nz-list-header>Date</nz-list-header>
-            <nz-list-item *ngFor="let dt of listDate">{{dt}}</nz-list-item>
-          </nz-list>
-        </div>
+  <nz-content>
+    <div nz-row class="inner-content" [nzGutter]="8">
+      <div nz-col nzXs="24" nzSm="24" nzMd="16" nzLg="18" nzXl="18">
+        <router-outlet></router-outlet>
       </div>
-    </nz-content>
-  </nz-layout>
+      <div nz-col nzXs="24" nzSm="24" nzMd="8" nzLg="6" nzXl="6">
+        <!-- Card -->
+        <nz-card style="width:300px;" [nzCover]="coverTemplate">
+          <nz-card-meta [nzTitle]="author" [nzDescription]="authordesp"></nz-card-meta>
+        </nz-card>
+        <ng-template #coverTemplate>
+          <img alt="example" [src]="authorimg" />
+        </ng-template>
+
+        <!-- Collection -->
+        <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
+          <nz-list-header>Collections</nz-list-header>
+          <nz-list-item *ngFor="let coll of listCollection">{{coll.name}} ({{coll.count}})</nz-list-item>
+        </nz-list>
+        <!-- Dates -->
+        <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
+          <nz-list-header>Date</nz-list-header>
+          <nz-list-item *ngFor="let dt of listDate">{{dt.postdate.format('YYYY-MM-DD')}} ({{dt.count}})</nz-list-item>
+        </nz-list>
+      </div>
+    </div>
+  </nz-content>
   <nz-footer>{{footer}}</nz-footer>
 </nz-layout>

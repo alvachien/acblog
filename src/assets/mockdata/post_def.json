@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "First one",
+        "brief": "This is the brief of the first one.",
+        "createdat": "2020-05-01T17:04:32",
+        "collection": [
+            "Collection 1",
+            "Collection 3"
+        ],
+        "tags": [
+            "Tag1",
+            "Tag5"
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Second one",
+        "brief": "This is the brief of the second one.",
+        "createdat": "2020-05-01T22:04:32",
+        "collection": [
+            "Collection 2",
+            "Collection 3"
+        ],
+        "tags": [
+            "Tag1",
+            "Tag2"
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Third one",
+        "brief": "This is the brief of the third one.",
+        "createdat": "2020-05-02T07:04:32",
+        "collection": [
+            "Collection 1",
+            "Collection 2"
+        ],
+        "tags": [
+            "Tag2",
+            "Tag5"
+        ]
+    }
+]

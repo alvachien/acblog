@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  assetfolder: 'http://localhost:25688/blogs/alvablog'
+  assetfolder: '/assets/mockdata/'
 };
 
 /*
