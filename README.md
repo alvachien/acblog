@@ -12,7 +12,7 @@ Major features:
 - [X] About Author;
 - [X] Navigation from Collections;
 - [X] Navigation from Dates;
-- [ ] Dynamic Themes;
+- [X] Dynamic Themes;
 - [ ] Comment
 
 # usage

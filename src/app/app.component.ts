@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
   private _destroyed$: ReplaySubject<boolean>;
+  currentTheme = 'Default';
 
   title = '';
   footer = '';
@@ -101,6 +102,55 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this._destroyed$) {
       this._destroyed$.next(true);
       this._destroyed$.complete();
+    }
+  }
+
+  onChangeTheme() {
+    if (this.currentTheme === 'Default') {
+      this.currentTheme = 'Dark';
+      this.changeTheme('dark');
+    } else if (this.currentTheme === 'Dark') {
+      this.currentTheme = 'Compact';
+      this.changeTheme('compact');
+    } else if (this.currentTheme === 'Compact') {
+      this.currentTheme = 'Default';
+      this.changeTheme('default');
+    }
+  }
+  private changeTheme(theme: 'default' | 'dark' | 'compact'): void {
+    if (theme === 'dark') {
+      const dom = document.getElementById('compact-theme');
+      if (dom) {
+        dom.remove();
+      }
+
+      const style = document.createElement('link');
+      style.type = 'text/css';
+      style.rel = 'stylesheet';
+      style.id = 'dark-theme';
+      style.href = 'assets/themes/style.dark.css';
+      document.body.appendChild(style);
+    } else if (theme === 'compact') {
+      const dom = document.getElementById('dark-theme');
+      if (dom) {
+        dom.remove();
+      }
+
+      const style = document.createElement('link');
+      style.type = 'text/css';
+      style.rel = 'stylesheet';
+      style.id = 'compact-theme';
+      style.href = 'assets/themes/style.compact.css';
+      document.body.appendChild(style);
+    } else {
+      const dom = document.getElementById('dark-theme');
+      if (dom) {
+        dom.remove();
+      }
+      const dom2 = document.getElementById('compact-theme');
+      if (dom2) {
+        dom2.remove();
+      }
     }
   }
 }
