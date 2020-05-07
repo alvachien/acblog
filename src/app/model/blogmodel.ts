@@ -17,6 +17,7 @@ export class BlogSetting {
 export class BlogPost {
     public id: number;
     public title: string;
+    public brief: string;
     public createdat: moment.Moment;
     public collection: string[] = [];
     public tags: string[] = [];

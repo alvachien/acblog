@@ -11,9 +11,10 @@ import { BlogSetting, BlogPost, } from '../model/blogmodel';
   providedIn: 'root'
 })
 export class JsonDataService {
-  // private _listPost: BlogPost[] = []; 
+  // private _listPost: BlogPost[] = [];
   // private _setting: BlogSetting;
   isListPostLoaded = false;
+  isListPostLoading = false;
   isSettingLoaded = false;
 
   subjectPost: BehaviorSubject<BlogPost[]>;
@@ -27,24 +28,23 @@ export class JsonDataService {
   }
 
   constructor(private client: HttpClient) {
-    console.log('service.constructor');
     this.subjectPost = new BehaviorSubject([]);
     this.subjectSetting = new BehaviorSubject(undefined);
   }
 
   readPost(): Observable<boolean> {
-    console.log('service.readpost.start');
-    if (!this.isListPostLoaded) {
+    if (!this.isListPostLoaded && !this.isListPostLoading) {
+      this.isListPostLoading = true;
       return this.client.get(environment.assetfolder + '/post_def.json')
       .pipe(
         map(data => {
-          console.log('service.readpost.received.map');
           if (data instanceof Array && data.length > 0) {
-            let arpost: BlogPost[] = [];
+            const arpost: BlogPost[] = [];
             data.forEach(ditem => {
-              let post = new BlogPost();
+              const post = new BlogPost();
               post.id = ditem.id;
               post.title = ditem.title;
+              post.brief = ditem.brief;
               post.createdat = moment(ditem.createdat);
               post.collection = ditem.collection;
               post.tags = ditem.tags;
@@ -53,10 +53,10 @@ export class JsonDataService {
 
             arpost.sort((a, b) => {
               if (a.createdat.isAfter(b.createdat)) {
-                return 1;
+                return -1;
               }
               if (a.createdat.isBefore(b.createdat)) {
-                return -1;
+                return 1;
               }
               return 0;
             });
@@ -64,11 +64,21 @@ export class JsonDataService {
           }
 
           this.isListPostLoaded = true;
+          this.isListPostLoading = false;
           return this.isListPostLoaded;
         })
       );
     } else {
-      return of(this.isListPostLoaded);
+      if (this.isListPostLoading) {
+        return of(false);
+      }
+      if (this.isListPostLoaded) {
+        // Re-boardcast
+        const arposts = this.subjectPost.value;
+        this.subjectPost.next(arposts);
+      }
+
+      return of(false);
     }
   }
 
@@ -77,13 +87,18 @@ export class JsonDataService {
       return this.client.get(environment.assetfolder + '/blog_setting.json')
       .pipe(
         map(data => {
-        let setting = data as BlogSetting;
+        const setting = data as BlogSetting;
         this.subjectSetting.next(setting);
 
         this.isSettingLoaded = true;
         return true;
       }));
     } else {
+      if (this.isListPostLoaded) {
+        // Re-boardcast
+        const setting = this.subjectSetting.value;
+        this.subjectSetting.next(setting);
+      }
       return of(this.isSettingLoaded);
     }
   }

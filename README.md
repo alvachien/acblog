@@ -1,16 +1,17 @@
 # introduction
-A tiny Blog system built with Angular/Ant Design
+
+A tiny Blog system built with Angular/Ant Design;
 
 ## Features
 
 Major features:
-- [X] Static files based blog system ( Statistic files are through *blogs* folder defined in [HIHAPI](https://github.com/alvachien/achihapi) );
+- [X] Static files based blog system ( Statistic files are through *assetfolder* folder defined in *environment* );
 - [X] Abosulte URL to blog entry;
 - [X] Collections;
 - [X] Post Date;
 - [X] About Author;
-- [ ] Navigation from Collections;
-- [ ] Navigation from Dates;
+- [X] Navigation from Collections;
+- [X] Navigation from Dates;
 - [ ] Dynamic Themes;
 - [ ] Comment
 
@@ -22,7 +23,7 @@ Websites built with this repo:
 
 # credits
 
-Following repos:
+This project credits to following repos:
 - [Angular](https://angular.io)
 - [Ant Design](https://ng.ant.design)
 - [Typescript](https://www.typescriptlang.org)

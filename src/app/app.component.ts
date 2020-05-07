@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
   private _destroyed$: ReplaySubject<boolean>;
-  
+
   title = '';
   footer = '';
   author = '';
@@ -29,11 +29,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }> = [];
 
   constructor(private dataService: JsonDataService) {
-    console.log("app.component.constructor");
   }
 
   ngOnInit() {
-    console.log("app.component.oninit");
     this._destroyed$ = new ReplaySubject(1);
 
     forkJoin([
@@ -50,9 +48,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
       next: data => {
+        this.listDate = [];
+        this.listCollection = [];
         data.forEach(val => {
           if (val.createdat) {
-            let dtidx = this.listDate.findIndex(dt => {
+            const dtidx = this.listDate.findIndex(dt => {
               return dt.postdate.isSame(val.createdat.clone().startOf('D'));
             });
             if (dtidx === -1) {
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
           }
           if (val.collection.length > 0) {
             val.collection.forEach(col => {
-              let cidx = this.listCollection.findIndex(coll => {
+              const cidx = this.listCollection.findIndex(coll => {
                 return col === coll.name;
               });
               if (cidx === -1) {
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
               } else {
                 this.listCollection[cidx].count ++;
               }
-            })
+            });
           }
         });
       }
@@ -92,7 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.authordesp = data.author;
           this.authorimg = data.authorimg;
 
-          document.title = data.title; // Update title  
+          document.title = data.title; // Update title
         }
       }
     });

@@ -6,7 +6,8 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'bloglist', component: BlogListComponent },
+  { path: 'blogbycoll/:collid', component: BlogListComponent },
+  { path: 'blogbydate/:datestr', component: BlogListComponent },
   { path: 'blog/:id', component: BlogComponent }
 ];
 

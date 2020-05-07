@@ -1,9 +1,9 @@
 <nz-layout class="mainpage-layout">
   <nz-header>
-    <div class="logo">{{title}}</div>
+    <h1 class="logo">{{title}}</h1>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item><a href="https://www.alvachien.com">Alva<b style="color:goldenrod;">Chien</b>.com</a></li>
-      <li nz-menu-item>Version: 0.2.2</li>
+      <li nz-menu-item><a href="https://www.github.com/alvachien/acblog">Version: 0.2.5</a></li>
     </ul>
   </nz-header>
   <nz-content>
@@ -13,22 +13,30 @@
       </div>
       <div nz-col nzXs="24" nzSm="24" nzMd="8" nzLg="6" nzXl="6">
         <!-- Card -->
-        <nz-card style="width:300px;" [nzCover]="coverTemplate">
-          <nz-card-meta [nzTitle]="author" [nzDescription]="authordesp"></nz-card-meta>
-        </nz-card>
-        <ng-template #coverTemplate>
-          <img alt="example" [src]="authorimg" />
-        </ng-template>
+        <div *ngIf="author || authordesp || authorimg">
+          <nz-card style="width:300px;" [nzCover]="coverTemplate">
+            <nz-card-meta [nzTitle]="author" [nzDescription]="authordesp"></nz-card-meta>
+          </nz-card>
+          <ng-template #coverTemplate>
+            <img alt="example" [src]="authorimg" />
+          </ng-template>
+        </div>
 
         <!-- Collection -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
           <nz-list-header>Collections</nz-list-header>
-          <nz-list-item *ngFor="let coll of listCollection">{{coll.name}} ({{coll.count}})</nz-list-item>
+          <nz-list-item *ngFor="let coll of listCollection">
+            <a [routerLink]="['blogbycoll', coll.name]">{{coll.name}} ({{coll.count}})</a>
+          </nz-list-item>
         </nz-list>
         <!-- Dates -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
           <nz-list-header>Date</nz-list-header>
-          <nz-list-item *ngFor="let dt of listDate">{{dt.postdate.format('YYYY-MM-DD')}} ({{dt.count}})</nz-list-item>
+          <nz-list-item *ngFor="let dt of listDate">
+            <a [routerLink]="['blogbydate', dt.postdate.format('YYYY-MM-DD')]">
+              {{dt.postdate.format('YYYY-MM-DD')}} ({{dt.count}})
+            </a>
+          </nz-list-item>
         </nz-list>
       </div>
     </div>

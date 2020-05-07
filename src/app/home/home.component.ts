@@ -15,21 +15,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   private _destroyed$: ReplaySubject<boolean>;
   listPosts: BlogPost[] = [];
 
-  constructor(public dataService: JsonDataService) {
+  constructor(private dataService: JsonDataService) {
   }
 
   ngOnInit(): void {
     this._destroyed$ = new ReplaySubject(1);
 
-    this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
+    this.dataService.subjectPost
+      .pipe(takeUntil(this._destroyed$))
+      .subscribe({
       next: data => {
         this.listPosts = data.slice();
       }
-    })
+    });
   }
 
   ngOnDestroy() {
-    console.log("app.home.ondestroy");
     if (this._destroyed$) {
       this._destroyed$.next(true);
       this._destroyed$.complete();

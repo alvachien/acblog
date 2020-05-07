@@ -20,8 +20,9 @@ export class BlogComponent implements OnInit {
     errorColor: '#cc0000',
   };
 
-  constructor(private activateRoute: ActivatedRoute,
-    private odataService: JsonDataService) { }
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private dataService: JsonDataService) { }
 
   ngOnInit(): void {
 
@@ -30,13 +31,13 @@ export class BlogComponent implements OnInit {
       if (x instanceof Array && x.length > 0) {
         bid = +x[1].path;
 
-        const pst = this.odataService.listPost.find(val => {
+        const pst = this.dataService.listPost.find(val => {
           return +val.id === +x[1].path;
         });
         if (pst) {
           this.postTitle = pst.title;
         }
-  
+
         this.filePath = environment.assetfolder + '/posts/' + bid.toString() + '.md';
       }
     });
