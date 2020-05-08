@@ -10,7 +10,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
-  styleUrls: ['./blog-list.component.less']
+  styleUrls: ['./blog-list.component.less'],
 })
 export class BlogListComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
@@ -18,6 +18,15 @@ export class BlogListComponent implements OnInit, OnDestroy {
   listPosts: BlogPost[] = [];
   private navpath = '';
   private navcriteria = '';
+  get listCriteria(): string {
+    if (this.navpath === 'blogbycoll') {
+      return `Collection: ${this.navcriteria}`
+    } else if(this.navpath === 'blogbydate') {
+      return `Date: ${this.navcriteria}`
+    } else {
+      return '';
+    }
+  }
 
   constructor(
     private activateRoute: ActivatedRoute,
