@@ -19,6 +19,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
@@ -50,6 +51,7 @@ registerLocaleData(zh);
     NzBreadCrumbModule,
     NzMenuModule,
     NzCardModule,
+    NzButtonModule,
     MarkdownModule.forRoot(),
   ],
   providers: [{

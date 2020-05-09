@@ -3,8 +3,8 @@
     <h1 class="logo">{{title}}</h1>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item><a href="https://www.alvachien.com">Alva<b style="color:goldenrod;">Chien</b>.com</a></li>
-      <li nz-menu-item><a href="https://www.github.com/alvachien/acblog">V:0.2.9</a></li>
-      <li nz-menu-item><a nz-button nzType="link" (click)="onChangeTheme()">{{currentTheme}}</a></li>
+      <li nz-menu-item><a href="https://www.github.com/alvachien/acblog">V:0.2.10</a></li>
+      <li nz-menu-item (click)="onChangeTheme()">{{currentTheme}}</li>
     </ul>
   </nz-header>
   <nz-content>
@@ -30,6 +30,7 @@
             <a [routerLink]="['blogbycoll', coll.name]">{{coll.name}} ({{coll.count}})</a>
           </nz-list-item>
         </nz-list>
+
         <!-- Dates -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
           <nz-list-header>Date</nz-list-header>

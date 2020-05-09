@@ -20,9 +20,9 @@ export class BlogListComponent implements OnInit, OnDestroy {
   private navcriteria = '';
   get listCriteria(): string {
     if (this.navpath === 'blogbycoll') {
-      return `Collection: ${this.navcriteria}`
+      return `Collection: ${this.navcriteria}`;
     } else if(this.navpath === 'blogbydate') {
-      return `Date: ${this.navcriteria}`
+      return `Date: ${this.navcriteria}`;
     } else {
       return '';
     }
