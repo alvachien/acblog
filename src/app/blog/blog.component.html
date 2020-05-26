@@ -7,19 +7,19 @@
 
 <div class="navigation-panel">
   <nz-button-group>
-    <button nz-button nzType="link" [disabled]="!previousButtonEnabled" (click)="onGoPrevious()"><i nz-icon nzType="left"></i>Newer Post</button>
-    <button nz-button nzType="link" [disabled]="!nextButtonEnabled" (click)="onGoNext()">Older Post<i nz-icon nzType="right"></i></button>
-  </nz-button-group>  
+    <button nz-button nzType="primary" [disabled]="!previousButtonEnabled" (click)="onGoPrevious()"><i nz-icon nzType="left"></i>Newer Post</button>
+    <button nz-button nzType="primary" [disabled]="!nextButtonEnabled" (click)="onGoNext()">Older Post<i nz-icon nzType="right"></i></button>
+  </nz-button-group>
 </div>
 
 <div nz-row class="editor-preview">
-  <markdown [src]="filePath" katex [katexOptions]="katexOptions">
+  <markdown emoji [src]="filePath" katex [katexOptions]="katexOptions">
   </markdown>
 </div>
 
 <div class="navigation-panel">
   <nz-button-group>
-    <button nz-button nzType="link" [disabled]="!previousButtonEnabled" (click)="onGoPrevious()"><i nz-icon nzType="left"></i>Newer Post</button>
-    <button nz-button nzType="link" [disabled]="!nextButtonEnabled" (click)="onGoNext()">Older Post<i nz-icon nzType="right"></i></button>
+    <button nz-button nzType="primary" [disabled]="!previousButtonEnabled" (click)="onGoPrevious()"><i nz-icon nzType="left"></i>Newer Post</button>
+    <button nz-button nzType="primary" [disabled]="!nextButtonEnabled" (click)="onGoNext()">Older Post<i nz-icon nzType="right"></i></button>
   </nz-button-group>  
 </div>
