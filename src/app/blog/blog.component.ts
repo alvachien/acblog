@@ -22,7 +22,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   prevPostId: number;
   nextPostId: number;
   public katexOptions: KatexOptions = {
-    displayMode: true,
+    // displayMode: true,
     throwOnError: false,
     errorColor: '#cc0000',
   };
