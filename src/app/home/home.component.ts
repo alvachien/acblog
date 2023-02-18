@@ -11,8 +11,7 @@ import { BlogPost } from '../model/blogmodel';
   styleUrls: ['./home.component.less'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line: variable-name
-  private _destroyed$: ReplaySubject<boolean>;
+  private _destroyed$: ReplaySubject<boolean> | null = null;
   listPosts: BlogPost[] = [];
 
   constructor(private dataService: JsonDataService) {

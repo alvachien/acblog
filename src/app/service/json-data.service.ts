@@ -28,8 +28,10 @@ export class JsonDataService {
   }
 
   constructor(private client: HttpClient) {
-    this.subjectPost = new BehaviorSubject([]);
-    this.subjectSetting = new BehaviorSubject(undefined);
+    let arposts: BlogPost[] = [];
+    this.subjectPost = new BehaviorSubject(arposts);
+    let setting: BlogSetting = new BlogSetting();
+    this.subjectSetting = new BehaviorSubject(setting);
   }
 
   readPost(): Observable<boolean> {

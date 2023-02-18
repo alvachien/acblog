@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReplaySubject, forkJoin } from 'rxjs';
+import { ReplaySubject, } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { JsonDataService } from '../service/json-data.service';
@@ -13,8 +13,7 @@ import * as moment from 'moment';
   styleUrls: ['./blog-list.component.less'],
 })
 export class BlogListComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line: variable-name
-  private _destroyed$: ReplaySubject<boolean>;
+  private _destroyed$: ReplaySubject<boolean> | null = null;
   listPosts: BlogPost[] = [];
   private navpath = '';
   private navcriteria = '';

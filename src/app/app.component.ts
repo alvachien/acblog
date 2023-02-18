@@ -11,8 +11,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./app.component.less'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line: variable-name
-  private _destroyed$: ReplaySubject<boolean>;
+  private _destroyed$: ReplaySubject<boolean> | null = null;
   currentTheme = 'Default';
 
   title = '';
@@ -39,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dataService.readPost(),
       this.dataService.readSetting()
     ]).subscribe({
-      next: rtns => {
+      next: () => {
         // Do nothing
       },
       error: err => {

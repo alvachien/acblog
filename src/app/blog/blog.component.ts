@@ -13,11 +13,10 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./blog.component.less'],
 })
 export class BlogComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line: variable-name
-  private _destroyed$: ReplaySubject<boolean>;
+  private _destroyed$: ReplaySubject<boolean> | null = null;
 
-  filePath: string;
-  postTitle: string;
+  filePath = '';
+  postTitle = '';
   postId: number;
   prevPostId: number;
   nextPostId: number;

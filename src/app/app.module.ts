@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { SecurityContext } from '@angular/compiler/src/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
