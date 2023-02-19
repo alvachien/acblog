@@ -25,7 +25,7 @@
 
         <!-- Collections -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
-          <nz-list-header>Collections</nz-list-header>
+          <nz-list-header>列表</nz-list-header>
           <nz-list-item *ngFor="let coll of listCollection">
             <a [routerLink]="['blogbycoll', coll.name]">{{coll.name}} ({{coll.count}})</a>
           </nz-list-item>
@@ -33,7 +33,7 @@
 
         <!-- Months -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
-          <nz-list-header>Month</nz-list-header>
+          <nz-list-header>发布月份</nz-list-header>
           <nz-list-item *ngFor="let dt of listMonth">
             <a [routerLink]="['blogbymonth', dt.postdate.format('YYYY-MM')]">
               {{dt.postdate.format('YYYY-MM')}} ({{dt.count}})
@@ -43,7 +43,7 @@
 
         <!-- Tags -->
         <div style="padding-left: 4px;">
-          <div>Tags: </div>
+          <div>标签</div>
           <nz-tag *ngFor="let tag of listTag">
             <a [routerLink]="['blogbytag', tag.name]">{{tag.name}}({{tag.count}})</a>
           </nz-tag>
