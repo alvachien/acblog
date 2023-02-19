@@ -4,6 +4,7 @@ import * as moment from 'moment' ;
 
 import { JsonDataService } from './service/json-data.service';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,9 @@ import { takeUntil } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   private _destroyed$: ReplaySubject<boolean> | null = null;
   currentTheme = 'Default';
+  get currentVersion(): string {
+    return environment.version;
+  };
 
   title = '';
   footer = '';
@@ -23,8 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
     name: string,
     count: number
   }> = [];
-  listDate: Array<{
-    postdate: moment.Moment,
+  listMonth: Array<{
+    postdate: moment.Moment, // First day of Month
     count: number
   }> = [];
 
@@ -48,20 +52,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
       next: data => {
-        this.listDate = [];
+        this.listMonth = [];
         this.listCollection = [];
         data.forEach(val => {
           if (val.createdat) {
-            const dtidx = this.listDate.findIndex(dt => {
-              return dt.postdate.isSame(val.createdat.clone().startOf('D'));
+            let mday = val.createdat.clone().startOf('M');
+            const dtidx = this.listMonth.findIndex(dt => {
+              return dt.postdate.isSame(mday);
             });
             if (dtidx === -1) {
-              this.listDate.push({
-                postdate: val.createdat.clone().startOf('D'),
+              this.listMonth.push({
+                postdate: mday,
                 count: 1,
               });
             } else {
-              this.listDate[dtidx].count ++;
+              this.listMonth[dtidx].count ++;
             }
           }
           if (val.collection.length > 0) {

@@ -22,13 +22,14 @@ export class BlogListComponent implements OnInit, OnDestroy {
       return `Collection: ${this.navcriteria}`;
     } else if(this.navpath === 'blogbydate') {
       return `Date: ${this.navcriteria}`;
+    } else if(this.navpath === 'blogbymonth') {
+      return `Month: ${this.navcriteria}`;
     } else {
       return '';
     }
   }
 
-  constructor(
-    private activateRoute: ActivatedRoute,
+  constructor(private activateRoute: ActivatedRoute,
     private dataService: JsonDataService) { }
 
   ngOnInit(): void {
@@ -48,6 +49,13 @@ export class BlogListComponent implements OnInit, OnDestroy {
           const dateinfo = moment(this.navcriteria, 'YYYY-MM-DD');
           data.forEach(val => {
             if (val.createdat.clone().startOf('D').isSame(dateinfo)) {
+              this.listPosts.push(val);
+            }
+          });
+        } else if(this.navpath === 'blogbymonth') {
+          const dateinfo = moment(this.navcriteria + '-01', 'YYYY-MM-DD');
+          data.forEach(val => {
+            if (val.createdat.clone().startOf('M').isSame(dateinfo)) {
               this.listPosts.push(val);
             }
           });

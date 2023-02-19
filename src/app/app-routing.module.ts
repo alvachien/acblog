@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'blogbycoll/:collid', component: BlogListComponent },
   { path: 'blogbydate/:datestr', component: BlogListComponent },
+  { path: 'blogbymonth/:datestr', component: BlogListComponent },
   { path: 'blog/:id', component: BlogComponent }
 ];
 
