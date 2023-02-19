@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'blogbycoll/:collid', component: BlogListComponent },
   { path: 'blogbydate/:datestr', component: BlogListComponent },
   { path: 'blogbymonth/:datestr', component: BlogListComponent },
+  { path: 'blogbytag/:tagname', component: BlogListComponent },
   { path: 'blog/:id', component: BlogComponent }
 ];
 

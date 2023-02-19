@@ -27,6 +27,10 @@ export class AppComponent implements OnInit, OnDestroy {
     name: string,
     count: number
   }> = [];
+  listTag: Array<{
+    name: string,
+    count: number
+  }> = [];
   listMonth: Array<{
     postdate: moment.Moment, // First day of Month
     count: number
@@ -54,6 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
       next: data => {
         this.listMonth = [];
         this.listCollection = [];
+        this.listTag = [];
         data.forEach(val => {
           if (val.createdat) {
             let mday = val.createdat.clone().startOf('M');
@@ -68,6 +73,21 @@ export class AppComponent implements OnInit, OnDestroy {
             } else {
               this.listMonth[dtidx].count ++;
             }
+          }
+          if (val.tags.length > 0) {
+            val.tags.forEach(tag => {
+              const cidx = this.listTag.findIndex(ctg => {
+                return tag === ctg.name;
+              });
+              if (cidx === -1) {
+                this.listTag.push({
+                  name: tag,
+                  count: 1
+                });
+              } else {
+                this.listTag[cidx].count ++;
+              }
+            });
           }
           if (val.collection.length > 0) {
             val.collection.forEach(col => {

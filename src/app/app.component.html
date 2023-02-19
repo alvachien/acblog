@@ -23,7 +23,7 @@
           </ng-template>
         </div>
 
-        <!-- Collection -->
+        <!-- Collections -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
           <nz-list-header>Collections</nz-list-header>
           <nz-list-item *ngFor="let coll of listCollection">
@@ -40,6 +40,14 @@
             </a>
           </nz-list-item>
         </nz-list>
+
+        <!-- Tags -->
+        <div style="padding-left: 4px;">
+          <div>Tags: </div>
+          <nz-tag *ngFor="let tag of listTag">
+            <a [routerLink]="['blogbytag', tag.name]">{{tag.name}}({{tag.count}})</a>
+          </nz-tag>
+        </div>
       </div>
     </div>
   </nz-content>

@@ -20,6 +20,8 @@ export class BlogListComponent implements OnInit, OnDestroy {
   get listCriteria(): string {
     if (this.navpath === 'blogbycoll') {
       return `Collection: ${this.navcriteria}`;
+    } else if(this.navpath === 'blogbytag') {
+      return `Tag: ${this.navcriteria}`;
     } else if(this.navpath === 'blogbydate') {
       return `Date: ${this.navcriteria}`;
     } else if(this.navpath === 'blogbymonth') {
@@ -42,6 +44,12 @@ export class BlogListComponent implements OnInit, OnDestroy {
         if (this.navpath === 'blogbycoll') {
           data.forEach(val => {
             if (val.collection.includes(this.navcriteria)) {
+              this.listPosts.push(val);
+            }
+          });
+        } else if(this.navpath === 'blogbytag') {
+          data.forEach(val => {
+            if (val.tags.includes(this.navcriteria)) {
               this.listPosts.push(val);
             }
           });
