@@ -16,6 +16,7 @@ export class JsonDataService {
   isListPostLoaded = false;
   isListPostLoading = false;
   isSettingLoaded = false;
+  currentBlog = '';
 
   subjectPost: BehaviorSubject<BlogPost[]>;
   subjectSetting: BehaviorSubject<BlogSetting>;
@@ -26,6 +27,15 @@ export class JsonDataService {
   get setting(): BlogSetting {
     return this.subjectSetting.getValue();
   }
+  get CurrentBlog(): string {
+    return this.currentBlog;
+  }
+  set CurrentBlog(cb: string) {
+    if (this.currentBlog !== cb) {
+      this.init();
+      this.currentBlog = cb;
+    }
+  }
 
   constructor(private client: HttpClient) {
     let arposts: BlogPost[] = [];
@@ -34,10 +44,18 @@ export class JsonDataService {
     this.subjectSetting = new BehaviorSubject(setting);
   }
 
+  public init() {
+    let arposts: BlogPost[] = [];
+    this.subjectPost = new BehaviorSubject(arposts);
+    let setting: BlogSetting = new BlogSetting();
+    this.subjectSetting = new BehaviorSubject(setting);
+    this.isListPostLoaded = false;
+  }
+
   readPost(): Observable<boolean> {
     if (!this.isListPostLoaded && !this.isListPostLoading) {
       this.isListPostLoading = true;
-      return this.client.get(environment.assetfolder + '/post_def.json')
+      return this.client.get(`${environment.assetfolder}/${this.currentBlog}/post_def.json`)
       .pipe(
         map(data => {
           if (data instanceof Array && data.length > 0) {
@@ -86,7 +104,7 @@ export class JsonDataService {
 
   readSetting(): Observable<boolean> {
     if (!this.isSettingLoaded) {
-      return this.client.get(environment.assetfolder + '/blog_setting.json')
+      return this.client.get(`${environment.assetfolder}/${this.currentBlog}/blog_setting.json`)
       .pipe(
         map(data => {
         const setting = data as BlogSetting;

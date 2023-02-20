@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { forkJoin, ReplaySubject } from 'rxjs';
 import * as moment from 'moment' ;
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { JsonDataService } from './service/json-data.service';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { BlogSetting } from './model/blogmodel';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -36,22 +39,32 @@ export class AppComponent implements OnInit, OnDestroy {
     count: number
   }> = [];
 
-  constructor(private dataService: JsonDataService) {
+  constructor(private dataService: JsonDataService,
+    private modal: NzModalService,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this._destroyed$ = new ReplaySubject(1);
 
-    forkJoin([
-      this.dataService.readPost(),
-      this.dataService.readSetting()
-    ]).subscribe({
-      next: () => {
-        // Do nothing
+    this.route.queryParams.subscribe({
+      next: val => {
+        if (val['blog']) {
+          this.dataService.currentBlog = val['blog'] as string;
+          this.loadData();  
+        } else {
+          // this.modal.error({
+          //   nzTitle: 'Error to load data',
+          //   nzContent: 'Error to load the data...'
+          // });
+        }
       },
       error: err => {
-        console.error(err);
-      }
+        this.modal.error({
+          nzTitle: 'Error to load data',
+          nzContent: 'Error to load the data...'
+        });
+    }
     });
 
     this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
@@ -141,6 +154,21 @@ export class AppComponent implements OnInit, OnDestroy {
       this.changeTheme('default');
     }
   }
+
+  private loadData() {
+    forkJoin([
+      this.dataService.readPost(),
+      this.dataService.readSetting()
+    ]).subscribe({
+      next: () => {
+        // Do nothing
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
   private changeTheme(theme: 'default' | 'dark' | 'compact'): void {
     if (theme === 'dark') {
       const dom = document.getElementById('compact-theme');

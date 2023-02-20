@@ -22,6 +22,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
@@ -70,6 +71,7 @@ export function markedOptionsFactory(): MarkedOptions {
     NzIconModule,
     NzButtonModule,
     NzTagModule,
+    NzModalModule,
     MarkdownModule.forRoot({
       markedOptions: {
         provide: MarkedOptions,
