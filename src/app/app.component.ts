@@ -62,9 +62,9 @@ export class AppComponent implements OnInit, OnDestroy {
       error: err => {
         this.modal.error({
           nzTitle: 'Error to load data',
-          nzContent: 'Error to load the data...'
+          nzContent: err.toString()
         });
-    }
+      }
     });
 
     this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
@@ -87,7 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
               this.listMonth[dtidx].count ++;
             }
           }
-          if (val.tags.length > 0) {
+          if (val.tags && val.tags.length > 0) {
             val.tags.forEach(tag => {
               const cidx = this.listTag.findIndex(ctg => {
                 return tag === ctg.name;
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit, OnDestroy {
               }
             });
           }
-          if (val.collection.length > 0) {
+          if (val.collection && val.collection.length > 0) {
             val.collection.forEach(col => {
               const cidx = this.listCollection.findIndex(coll => {
                 return col === coll.name;

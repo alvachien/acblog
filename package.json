@@ -1,12 +1,13 @@
 {
   "name": "acblog",
-  "version": "0.2.20",
+  "version": "0.2.22",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "build-prod-ali-alva": "ng build -c alvablog --base-href=/alvablog/",
     "build-prod-ali-fish": "ng build -c fishblog --base-href=/fishblog/",
+    "build-ali": "ng build -c ali --base-href=/blog/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
