@@ -68,11 +68,14 @@ export class BlogComponent implements OnInit, OnDestroy {
             this.nextPostId = -1;
           }
 
-          this.filePath = environment.assetfolder + '/posts/' + this.postId.toString() + '.md';
+          this.filePath = `${environment.assetfolder}/${this.dataService.currentBlog}/posts/${this.postId.toString()}.md`;
         }
       }
     });
+
     this.activateRoute.url.subscribe((x: any) => {
+      console.debug("ACBlog Debug: " + x);
+
       if (x instanceof Array && x.length > 0) {
         this.postId = +x[1].path;
 
@@ -80,6 +83,7 @@ export class BlogComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   ngOnDestroy() {
     if (this._destroyed$) {
       this._destroyed$.next(true);

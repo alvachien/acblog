@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  version: '0.2.22',
+  version: '0.2.23',
 
   apphost: 'http://localhost:29525/',
   assetfolder: '/assets/mockdata/'
