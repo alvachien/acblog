@@ -3,6 +3,10 @@
     "MonthOfPublish": "发布月份",
     "Tag": "标签",
     "Home": "主页",
+    "NextPost": "下一篇",
+    "PreviousPost": "上一篇",
+    "NewerPost": "新的一篇",
+    "OlderPost": "旧的一篇",
     "Language": {
         "English": "英文",
         "SimplifiedChinese": "简体中文"

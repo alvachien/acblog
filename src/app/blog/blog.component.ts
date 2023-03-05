@@ -20,6 +20,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   postId: number;
   prevPostId: number;
   nextPostId: number;
+  listTag: string[] = [];
   public katexOptions: KatexOptions = {
     // displayMode: true,
     throwOnError: false,
@@ -57,6 +58,7 @@ export class BlogComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.listTag = [];
     this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
       next: val => {
         if (this.postId !== -1) {
@@ -65,6 +67,7 @@ export class BlogComponent implements OnInit, OnDestroy {
           });
           if (pstidx !== -1) {
             this.postTitle = val[pstidx].title;
+            this.listTag = val[pstidx].tags.map(t => t);
 
             if (pstidx > 0) {
               this.prevPostId = val[pstidx - 1].id;

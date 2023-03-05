@@ -3,6 +3,10 @@
     "MonthOfPublish": "Month of Publish",
     "Tag": "Tag",
     "Home": "Home",
+    "NextPost": "Next Post",
+    "PreviousPost": "Previous Post",
+    "NewerPost": "Newer Post",
+    "OlderPost": "Older Post",
     "Language": {
         "English": "English",
         "SimplifiedChinese": "Simplified Chinese"

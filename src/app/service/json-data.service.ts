@@ -67,7 +67,7 @@ export class JsonDataService {
               post.brief = ditem.brief;
               post.createdat = moment(ditem.createdat);
               post.collection = ditem.collection;
-              post.tags = ditem.tags;
+              post.tags = ditem.tag;
               arpost.push(post);
             });
 

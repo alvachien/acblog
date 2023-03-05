@@ -8,7 +8,7 @@
             "Collection 1",
             "Collection 3"
         ],
-        "tags": [
+        "tag": [
             "Tag1",
             "Tag5"
         ]
@@ -22,7 +22,7 @@
             "Collection 2",
             "Collection 3"
         ],
-        "tags": [
+        "tag": [
             "Tag1",
             "Tag2"
         ]
@@ -36,7 +36,7 @@
             "Collection 1",
             "Collection 2"
         ],
-        "tags": [
+        "tag": [
             "Tag2",
             "Tag5"
         ]
