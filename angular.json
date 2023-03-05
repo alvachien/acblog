@@ -181,9 +181,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "node_modules/katex/dist/katex.min.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/marked/marked.min.js",
+              "node_modules/katex/dist/katex.min.js",
+              "node_modules/katex/dist/contrib/auto-render.min.js",
+              "node_modules/emoji-toolkit/lib/js/joypixels.min.js"
+            ],
             "karmaConfig": "karma.conf.js"
           }
         },

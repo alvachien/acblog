@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { JsonDataService } from './json-data.service';
 
@@ -6,7 +7,11 @@ describe('JsonDataService', () => {
   let service: JsonDataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+      ],  
+    });
     service = TestBed.inject(JsonDataService);
   });
 

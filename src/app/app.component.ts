@@ -9,6 +9,7 @@ import { translate, TranslocoService } from '@ngneat/transloco';
 import { JsonDataService } from './service/json-data.service';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { BlogUtility } from './model/blogmodel';
 
 @Component({
   selector: 'app-root',
@@ -74,55 +75,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
       next: data => {
-        this.listMonth = [];
-        this.listCollection = [];
-        this.listTag = [];
-        data.forEach(val => {
-          if (val.createdat) {
-            let mday = val.createdat.clone().startOf('M');
-            const dtidx = this.listMonth.findIndex(dt => {
-              return dt.postdate.isSame(mday);
-            });
-            if (dtidx === -1) {
-              this.listMonth.push({
-                postdate: mday,
-                count: 1,
-              });
-            } else {
-              this.listMonth[dtidx].count ++;
-            }
-          }
-          if (val.tags && val.tags.length > 0) {
-            val.tags.forEach(tag => {
-              const cidx = this.listTag.findIndex(ctg => {
-                return tag === ctg.name;
-              });
-              if (cidx === -1) {
-                this.listTag.push({
-                  name: tag,
-                  count: 1
-                });
-              } else {
-                this.listTag[cidx].count ++;
-              }
-            });
-          }
-          if (val.collection && val.collection.length > 0) {
-            val.collection.forEach(col => {
-              const cidx = this.listCollection.findIndex(coll => {
-                return col === coll.name;
-              });
-              if (cidx === -1) {
-                this.listCollection.push({
-                  name: col,
-                  count: 1
-                });
-              } else {
-                this.listCollection[cidx].count ++;
-              }
-            });
-          }
-        });
+        let util = new BlogUtility();
+        util.analyzePosts(data);
+
+        this.listMonth = util.listMonth;
+        this.listCollection = util.listCollection;
+        this.listTag = util.listTag;
       }
     });
 
@@ -219,6 +177,5 @@ export class AppComponent implements OnInit, OnDestroy {
       this.i18n.setLocale(zh_CN);
       this.translocoService.setActiveLang('zh');
     }
-
   }
 }

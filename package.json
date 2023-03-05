@@ -1,6 +1,6 @@
 {
   "name": "acblog",
-  "version": "0.3.35",
+  "version": "0.3.45",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +10,7 @@
     "build-ali": "ng build -c ali --base-href=/blog/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "devtest": "ng test --code-coverage"
   },
   "private": true,
   "dependencies": {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  version: '0.3.35',
+  version: '0.3.45',
   DefaultLanguage: 'zh',
 
   apphost: 'http://localhost:29525',
