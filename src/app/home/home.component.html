@@ -1,5 +1,5 @@
 <!-- Table of Content -->
-<nz-table #basicTable [nzData]="listPosts">
+<nz-table #basicTable nzShowPagination nzShowSizeChanger [nzData]="listPosts">
   <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td>

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  version: '0.3.33',
+  version: '0.3.35',
   DefaultLanguage: 'zh',
 
   apphost: 'https://www.alvachien.com/fishblog',
