@@ -2,12 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { forkJoin, ReplaySubject } from 'rxjs';
 import * as moment from 'moment' ;
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { ActivatedRoute } from '@angular/router';
+import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import { translate, TranslocoService } from '@ngneat/transloco';
 
 import { JsonDataService } from './service/json-data.service';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { BlogSetting } from './model/blogmodel';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private _destroyed$: ReplaySubject<boolean> | null = null;
-  currentTheme = 'Default';
+  currentTheme = 'Theme.Default';
   get currentVersion(): string {
     return environment.version;
   };
@@ -38,10 +39,13 @@ export class AppComponent implements OnInit, OnDestroy {
     postdate: moment.Moment, // First day of Month
     count: number
   }> = [];
+  queryParams: any = {};
 
   constructor(private dataService: JsonDataService,
     private modal: NzModalService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private i18n: NzI18nService,
+    private translocoService: TranslocoService,) {
   }
 
   ngOnInit() {
@@ -51,7 +55,8 @@ export class AppComponent implements OnInit, OnDestroy {
       next: val => {
         if (val['blog']) {
           this.dataService.currentBlog = val['blog'] as string;
-          this.loadData();  
+          this.queryParams['blog'] = this.dataService.currentBlog;
+          this.loadData();
         } else {
           // this.modal.error({
           //   nzTitle: 'Error to load data',
@@ -143,14 +148,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onChangeTheme() {
-    if (this.currentTheme === 'Default') {
-      this.currentTheme = 'Dark';
+    if (this.currentTheme === 'Theme.Default') {
+      this.currentTheme = 'Theme.Dark';
       this.changeTheme('dark');
-    } else if (this.currentTheme === 'Dark') {
-      this.currentTheme = 'Compact';
+    } else if (this.currentTheme === 'Theme.Dark') {
+      this.currentTheme = 'Theme.Compact';
       this.changeTheme('compact');
-    } else if (this.currentTheme === 'Compact') {
-      this.currentTheme = 'Default';
+    } else if (this.currentTheme === 'Theme.Compact') {
+      this.currentTheme = 'Theme.Default';
       this.changeTheme('default');
     }
   }
@@ -169,7 +174,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  private changeTheme(theme: 'default' | 'dark' | 'compact'): void {
+  changeTheme(theme: 'default' | 'dark' | 'compact'): void {
     if (theme === 'dark') {
       const dom = document.getElementById('compact-theme');
       if (dom) {
@@ -204,5 +209,16 @@ export class AppComponent implements OnInit, OnDestroy {
         dom2.remove();
       }
     }
+  }
+
+  switchLanguage(lang: string) {
+    if (lang === 'en_US') {
+      this.i18n.setLocale(en_US);
+      this.translocoService.setActiveLang('en');
+    } else {
+      this.i18n.setLocale(zh_CN);
+      this.translocoService.setActiveLang('zh');
+    }
+
   }
 }

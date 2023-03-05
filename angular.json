@@ -19,7 +19,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "lodash",
-              "moment"
+              "moment",
+              "flat"
             ],
             "outputPath": "dist/acblog",
             "index": "src/index.html",

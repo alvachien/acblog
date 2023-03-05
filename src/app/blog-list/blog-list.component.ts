@@ -17,6 +17,8 @@ export class BlogListComponent implements OnInit, OnDestroy {
   listPosts: BlogPost[] = [];
   private navpath = '';
   private navcriteria = '';
+  queryParams: any = {};
+
   get listCriteria(): string {
     if (this.navpath === 'blogbycoll') {
       return `Collection: ${this.navcriteria}`;
@@ -36,6 +38,18 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._destroyed$ = new ReplaySubject(1);
+    this.activateRoute.queryParams.subscribe({
+      next: val => {
+        if (val['blog']) {
+          this.queryParams['blog'] = this.dataService.currentBlog;
+        } else {
+        }
+      },
+      error: err => {
+        // Do nothing
+      }
+    });
+
     this.dataService.subjectPost
     .pipe(takeUntil(this._destroyed$))
     .subscribe({

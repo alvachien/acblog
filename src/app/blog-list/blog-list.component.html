@@ -1,6 +1,6 @@
 <nz-breadcrumb>
     <nz-breadcrumb-item>
-      <a [routerLink]="['../../']">Home</a>
+      <a [routerLink]="['../../']" [queryParams]="queryParams">{{'Home' | transloco}}</a>
     </nz-breadcrumb-item>
     <nz-breadcrumb-item>{{listCriteria}}</nz-breadcrumb-item>
 </nz-breadcrumb>
@@ -9,7 +9,7 @@
     <tbody>
         <tr *ngFor="let data of basicTable.data">
             <td>
-                <a routerLink="/blog/{{data.id}}">
+                <a routerLink="/blog/{{data.id}}" [queryParams]="queryParams">
                     <h1>{{ data.title }}</h1>
                 </a>
                 <p>{{ data.brief }}</p>

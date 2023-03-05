@@ -1,6 +1,6 @@
 <nz-breadcrumb>
   <nz-breadcrumb-item>
-    <a [routerLink]="['../../']">Home</a>
+    <a [routerLink]="['../../']" [queryParams]="queryParams">{{'Home' | transloco}}</a>
   </nz-breadcrumb-item>
   <nz-breadcrumb-item>{{postTitle}}</nz-breadcrumb-item>
 </nz-breadcrumb>

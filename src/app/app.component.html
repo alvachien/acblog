@@ -4,7 +4,20 @@
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item><a href="https://www.alvachien.com">Alva<b style="color:gold;">Chien</b>.com</a></li>
       <li nz-menu-item><a href="https://www.github.com/alvachien/acblog">{{currentVersion}}</a></li>
-      <li nz-menu-item (click)="onChangeTheme()">{{currentTheme}}</li>
+      <li nz-menu-item (click)="onChangeTheme()">{{currentTheme | transloco}}</li>
+      <li nz-menu-item>
+        <div>
+          <a nz-dropdown [nzDropdownMenu]="menuLanguage">
+            <span nz-icon nzType="global" nzTheme="outline" class="app-header-icon"></span>
+          </a>
+          <nz-dropdown-menu #menuLanguage="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item (click)="switchLanguage('en_US')">{{'Language.English' | transloco }}</li>
+              <li nz-menu-item (click)="switchLanguage('zh_CN')">{{'Language.SimplifiedChinese' | transloco }}</li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+      </li>
     </ul>
   </nz-header>
   <nz-content>
@@ -25,17 +38,17 @@
 
         <!-- Collections -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
-          <nz-list-header>列表</nz-list-header>
+          <nz-list-header>{{'List' | transloco}}</nz-list-header>
           <nz-list-item *ngFor="let coll of listCollection">
-            <a [routerLink]="['blogbycoll', coll.name]">{{coll.name}} ({{coll.count}})</a>
+            <a [routerLink]="['blogbycoll', coll.name]" [queryParams]="queryParams">{{coll.name}} ({{coll.count}})</a>
           </nz-list-item>
         </nz-list>
 
         <!-- Months -->
         <nz-list nzBordered nzSize="small" class="mainpage-sidepanel">
-          <nz-list-header>发布月份</nz-list-header>
+          <nz-list-header>{{'MonthOfPublish' | transloco}}</nz-list-header>
           <nz-list-item *ngFor="let dt of listMonth">
-            <a [routerLink]="['blogbymonth', dt.postdate.format('YYYY-MM')]">
+            <a [routerLink]="['blogbymonth', dt.postdate.format('YYYY-MM')]" [queryParams]="queryParams">
               {{dt.postdate.format('YYYY-MM')}} ({{dt.count}})
             </a>
           </nz-list-item>
@@ -43,9 +56,9 @@
 
         <!-- Tags -->
         <div style="padding-left: 4px;">
-          <div>标签</div>
+          <div>{{'Tag' | transloco}}</div>
           <nz-tag *ngFor="let tag of listTag">
-            <a [routerLink]="['blogbytag', tag.name]">{{tag.name}}({{tag.count}})</a>
+            <a [routerLink]="['blogbytag', tag.name]" [queryParams]="queryParams">{{tag.name}}({{tag.count}})</a>
           </nz-tag>
         </div>
       </div>

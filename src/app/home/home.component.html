@@ -3,7 +3,7 @@
   <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td>
-        <a routerLink="/blog/{{data.id}}"><h1>{{ data.title }}</h1></a>
+        <a routerLink="/blog/{{data.id}}" [queryParams]="queryParams"><h1>{{ data.title }}</h1></a>
         <p>{{ data.brief }}</p>
         <nz-divider></nz-divider>
         <p>{{ data.createdat.format('YYYY-MM-DD h:mm:ss') }}</p>

@@ -1,0 +1,15 @@
+{
+    "List": "列表",
+    "MonthOfPublish": "发布月份",
+    "Tag": "标签",
+    "Home": "主页",
+    "Language": {
+        "English": "英文",
+        "SimplifiedChinese": "简体中文"
+    },
+    "Theme": {
+        "Default": "默认",
+        "Compact": "紧凑",
+        "Dark": "暗调"
+    }
+}

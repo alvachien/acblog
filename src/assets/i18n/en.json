@@ -1,0 +1,15 @@
+{
+    "List": "List",
+    "MonthOfPublish": "Month of Publish",
+    "Tag": "Tag",
+    "Home": "Home",
+    "Language": {
+        "English": "English",
+        "SimplifiedChinese": "Simplified Chinese"
+    },
+    "Theme": {
+        "Default": "Default",
+        "Compact": "Compact",
+        "Dark": "Dark"
+    }
+}

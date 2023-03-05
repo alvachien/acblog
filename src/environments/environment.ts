@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  version: '0.2.23',
+  version: '0.3.30',
+  DefaultLanguage: 'zh',
 
-  apphost: 'http://localhost:29525/',
+  apphost: 'http://localhost:29525',
   assetfolder: '/assets/mockdata/'
 };
 

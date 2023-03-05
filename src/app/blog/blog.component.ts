@@ -25,6 +25,8 @@ export class BlogComponent implements OnInit, OnDestroy {
     throwOnError: false,
     errorColor: '#cc0000',
   };
+  queryParams: any = {};
+ 
   get previousButtonEnabled(): boolean {
     return this.prevPostId !== -1;
   }
@@ -43,6 +45,17 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._destroyed$ = new ReplaySubject(1);
+    this.activateRoute.queryParams.subscribe({
+      next: val => {
+        if (val['blog']) {
+          this.queryParams['blog'] = this.dataService.currentBlog;
+        } else {
+        }
+      },
+      error: err => {
+        // Do nothing
+      }
+    });
 
     this.dataService.subjectPost.pipe(takeUntil(this._destroyed$)).subscribe({
       next: val => {
@@ -93,12 +106,12 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   onGoPrevious(): void {
     if (this.previousButtonEnabled) {
-      this.router.navigate(['blog', this.prevPostId]);
+      this.router.navigate(['blog', this.prevPostId], { queryParams: this.queryParams });
     }
   }
   onGoNext(): void {
     if (this.nextButtonEnabled) {
-      this.router.navigate(['blog', this.nextPostId]);
+      this.router.navigate(['blog', this.nextPostId], { queryParams: this.queryParams });
     }
   }
 }
